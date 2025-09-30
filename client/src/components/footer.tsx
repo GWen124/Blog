@@ -40,15 +40,15 @@ function Footer() {
     };
 
     return (
-        <footer>
+        <footer className="footer">
             <Helmet>
                 <link rel="alternate" type="application/rss+xml" title={siteName} href="/sub/rss.xml" />
                 <link rel="alternate" type="application/atom+xml" title={siteName} href="/sub/atom.xml" />
                 <link rel="alternate" type="application/json" title={siteName} href="/sub/rss.json" />
             </Helmet>
             <div className="flex flex-col mb-8 space-y-2 justify-center items-center t-primary ani-show">
-                {footerHtml && <div dangerouslySetInnerHTML={{ __html: footerHtml }} />}
-                <p className='text-sm text-neutral-500 font-normal link-line'>
+                {footerHtml && <div className="footer-line" dangerouslySetInnerHTML={{ __html: footerHtml }} />}
+                <p className='footer-line'>
                     <span onDoubleClick={() => {
                         if(doubleClickTimes >= 2){ // actually need 3 times doubleClick
                             setDoubleClickTimes(0)
@@ -59,12 +59,12 @@ function Footer() {
                             setDoubleClickTimes(doubleClickTimes + 1)
                         }
                     }}>
-                        © {new Date().getFullYear()} <a className='hover:underline' href="https://blog.gw124.top" target="_blank">BLOG.GW124.TOP</a>
+                        © {new Date().getFullYear()} <a className='link-green' href="https://blog.gw124.top" target="_blank" rel="noopener noreferrer">BLOG.GW124.TOP</a>
                     </span>
                     {config.get<boolean>('rss') && <>
                         <Spliter />
                         <Popup trigger={
-                            <button className="hover:underline" type="button">
+                            <button className="link-green" type="button">
                                 RSS
                             </button>
                         }

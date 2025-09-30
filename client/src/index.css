@@ -204,3 +204,64 @@ a.toc-link {
 .is-active-link::before {
   @apply bg-theme;
 }
+
+  /* footer text styles from footer.md (no background changes) */
+  .footer {
+    margin-top: auto;
+    padding: 1.5rem;
+    text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro SC", "PingFang SC", "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans SC", "Microsoft YaHei", Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+  }
+
+  .footer .footer-line {
+    color: #94a3b8;
+    font-size: 0.9rem;
+    margin: 0;
+    letter-spacing: 0.5px;
+    line-height: 1.5;
+    font-feature-settings: "liga", "kern";
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .footer .link-green {
+    color: #94a3b8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    font-weight: 600;
+    text-underline-offset: 2px;
+    position: relative;
+  }
+
+  .footer .link-green::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+    border-radius: 2px;
+  }
+
+  .footer .link-green:hover::after { transform: scaleX(1); }
+  .footer .link-green:visited { color: #94a3b8; }
+
+  .footer .footer-line .link-green:first-of-type,
+  .footer .footer-line .link-green:last-of-type {
+    color: #94a3b8;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+  }
+
+  .footer .footer-line .link-green:first-of-type:hover,
+  .footer .footer-line .link-green:last-of-type:hover {
+    color: #94a3b8;
+  }
