@@ -218,7 +218,7 @@ a.toc-link {
   }
 
   .footer .footer-line {
-    color: #94a3b8;
+    color: inherit;
     font-size: 0.9rem;
     margin: 0;
     letter-spacing: 0.5px;
@@ -228,7 +228,7 @@ a.toc-link {
   }
 
   .footer .link-green {
-    color: #94a3b8;
+    color: inherit;
     text-decoration: none;
     transition: color 0.2s ease;
     font-weight: 600;
@@ -251,11 +251,11 @@ a.toc-link {
   }
 
   .footer .link-green:hover::after { transform: scaleX(1); }
-  .footer .link-green:visited { color: #94a3b8; }
+  .footer .link-green:visited { color: inherit; }
 
   .footer .footer-line .link-green:first-of-type,
   .footer .footer-line .link-green:last-of-type {
-    color: #94a3b8;
+    color: inherit;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.4px;
@@ -263,5 +263,5 @@ a.toc-link {
 
   .footer .footer-line .link-green:first-of-type:hover,
   .footer .footer-line .link-green:last-of-type:hover {
-    color: #94a3b8;
+    color: inherit;
   }
