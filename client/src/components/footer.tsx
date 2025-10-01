@@ -59,7 +59,7 @@ function Footer() {
                             setDoubleClickTimes(doubleClickTimes + 1)
                         }
                     }}>
-                        © {new Date().getFullYear()} <a className='link-green' href="https://gw124.top" target="_blank" rel="noopener noreferrer">BLOG.GW124.TOP</a>
+                        © {new Date().getFullYear()} <a className='link-green' href="https://gw124.top" target="_blank" rel="noopener noreferrer">BLOG.GW124.TOP</a> · Powered By <a className='link-green' href="https://github.com/openRin/Rin" target="_blank" rel="noopener noreferrer">Rin</a>
                     </span>
                     {config.get<boolean>('rss') && <>
                         <Spliter />
