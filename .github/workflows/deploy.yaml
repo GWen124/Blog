@@ -3,6 +3,7 @@ name: Deploy
 on:
   push:
     branches:
+      - MyRin
       - dev
       - main
       - fix/*
