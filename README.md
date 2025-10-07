@@ -1,706 +1,106 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🌏 全球主要城市时间概览</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif; line-height: 1.6; color: #333; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); min-height: 100vh; }
-    .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
-    .header { text-align: center; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 20px; padding: 30px; margin-bottom: 30px; box-shadow: 0 8px 32px rgba(0,0,0,0.1); }
-    .header h1 { font-size: 2.5em; margin-bottom: 10px; background: linear-gradient(45deg, #667eea, #764ba2); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    .update-time { font-size: 1.1em; color: #666; margin-bottom: 20px; }
-    .auto-refresh { background: #4CAF50; color: white; padding: 8px 16px; border-radius: 20px; font-size: 0.9em; display: inline-block; margin-top: 10px; }
-    .continent-section { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 15px; margin-bottom: 25px; padding: 25px; box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-    .continent-title { font-size: 1.8em; margin-bottom: 20px; text-align: center; color: #2c3e50; border-bottom: 3px solid #3498db; padding-bottom: 10px; }
-    table { width: 100%; border-collapse: collapse; margin: 0 auto; background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    th { background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 15px 10px; text-align: center; font-weight: 600; }
-    td { padding: 12px 10px; text-align: center; border-bottom: 1px solid #eee; transition: background-color 0.3s; }
-    tr:hover td { background-color: #f8f9fa; }
-    .time-cell { font-family: "Courier New", monospace; font-weight: bold; color: #2c3e50; }
-    .footer { text-align: center; margin-top: 30px; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 15px; color: #666; }
-    .loading { display: none; text-align: center; padding: 20px; }
-    .spinner { border: 4px solid #f3f3f3; border-top: 4px solid #3498db; border-radius: 50%; width: 40px; height: 40px; animation: spin 2s linear infinite; margin: 0 auto; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    @media (max-width: 768px) {
-      .container { padding: 10px; }
-      .header h1 { font-size: 2em; }
-      table { font-size: 0.9em; }
-      th, td { padding: 8px 5px; }
-    }
-    .flag { font-size: 1.2em; margin-right: 5px; }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <div class="header">
-      <h1>🌏 全球主要城市时间概览</h1>
-      <div class="update-time">🕒 更新时间：<strong>2025-10-07 16:02:35 北京时间</strong></div>
-      <div class="auto-refresh">🔄 自动刷新：每小时更新</div>
-    </div>
+# 🌏 全球主要城市时间概览
 
-    <div class="loading" id="loading">
-      <div class="spinner"></div>
-      <p>正在更新时间...</p>
-    </div>
+🕒 更新时间：**2025-10-07 16:14:44 北京时间**
 
-    <div class="continent-section">
-      <h2 class="continent-title">🌏 亚洲</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🇯🇵 东京</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇰🇷 首尔</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇰🇵 平壤</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇹🇼 台北</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇵🇭 马尼拉</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇳 北京</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇧🇳 斯里巴加湾</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇭🇰 香港</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇲🇴 澳门</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇲🇳 乌兰巴托</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇩 雅加达</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇰🇭 金边</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇸🇬 新加坡</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇱🇦 万象</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇲🇾 吉隆坡</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇹🇭 曼谷</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇲🇲 仰光</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇩 达卡</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇧🇹 廷布</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇳🇵 加德满都</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇱🇰 科伦坡</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇱🇰 科伦坡</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇳 新德里</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇰🇿 阿拉木图</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇰🇬 比什凯克</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇲🇻 马累</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇺🇿 塔什干</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇦🇫 喀布尔</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇹🇯 杜尚别</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇵🇰 卡拉奇</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇴🇲 马斯喀特</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇹🇲 阿什哈巴德</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇦🇪 迪拜</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇶🇦 多哈</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇷 德黑兰</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇭 麦纳麦</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇦🇿 巴库</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇰🇼 科威特城</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇸🇦 利雅得</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇬🇪 第比利斯</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇦🇲 埃里温</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇶 巴格达</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇯🇴 安曼</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇱🇧 贝鲁特</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇱 耶路撒冷</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+🔄 自动刷新：每小时更新
 
-    <div class="continent-section">
-      <h2 class="continent-title">🌍 欧洲</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🇷🇺 莫斯科</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇺🇦 基辅</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇹🇷 伊斯坦布尔</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇲🇩 基希讷乌</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇾 明斯克</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇷🇴 布加勒斯特</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇱🇹 维尔纽斯</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇫🇮 赫尔辛基</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇪🇪 塔林</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇱🇻 里加</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇬🇷 雅典</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇬 索非亚</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇲🇰 斯科普里</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇵🇱 华沙</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇷🇸 贝尔格莱德</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇦🇱 地拉那</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇲🇪 波德戈里察</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇭🇺 布达佩斯</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇧🇦 萨拉热窝</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇸🇪 斯德哥尔摩</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇦🇹 维也纳</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇭🇷 萨格勒布</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇸🇮 卢布尔雅那</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇿 布拉格</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇩🇪 柏林</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇩🇰 哥本哈根</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇹 罗马</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇳🇴 奥斯陆</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇭 苏黎世</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇱🇺 卢森堡</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇳🇱 阿姆斯特丹</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇪 布鲁塞尔</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇫🇷 巴黎</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇬🇧 伦敦</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇪🇸 马德里</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇪 都柏林</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇵🇹 里斯本</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇮🇸 雷克雅未克</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+## 📱 网页版本
 
-    <div class="continent-section">
-      <h2 class="continent-title">🌎 美洲</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🇧🇷 里约热内卢</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇷 圣保罗</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇬🇫 卡宴</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇸🇷 帕拉马里博</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇺🇾 蒙得维的亚</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇵🇾 亚松森</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇬🇾 乔治敦</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇦🇷 布宜诺斯艾利斯</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇧 布里奇敦</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇹🇹 西班牙港</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇻🇪 加拉加斯</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇧🇴 拉巴斯</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇩🇴 圣多明各</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇱 圣地亚哥</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇺🇸 纽约</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇨🇴 波哥大</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇯🇲 金斯敦</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇵🇪 利马</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇪🇨 基多</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇦 多伦多</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇵🇦 巴拿马城</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇨🇺 哈瓦那</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇷 圣何塞</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇳🇮 马那瓜</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇭🇳 特古西加尔巴</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇺🇸 芝加哥</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇬🇹 危地马拉城</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇲🇽 墨西哥城</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇺🇸 丹佛</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇱 复活节岛</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-          </tr>
-          <tr>
-            <td>🇺🇸 洛杉矶</td>
-            <td class="time-cell">2025-10-07 08:02:35</td>
-            <td>🇨🇦 温哥华</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇺🇸 安克雷奇</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+👉 [点击查看完整网页版本](index.html)
 
-    <div class="continent-section">
-      <h2 class="continent-title">🌍 非洲</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🇲🇺 路易港</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇸🇨 维多利亚</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇲🇬 塔那那利佛</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇸🇴 摩加迪沙</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇰🇲 莫罗尼</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇩🇯 吉布提</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇹🇿 达累斯萨拉姆</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇪🇷 阿斯马拉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇪🇹 亚的斯亚贝巴</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇰🇪 内罗毕</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇺🇬 坎帕拉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇲🇿 马普托</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇸🇩 喀土穆</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇸🇸 朱巴</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇪🇬 开罗</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇸🇿 姆巴巴内</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇿🇼 哈拉雷</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇷🇼 基加利</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇧🇮 布琼布拉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇿🇲 卢萨卡</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇿🇦 约翰内斯堡</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇱🇸 马塞卢</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇧🇼 哈博罗内</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇨🇫 班吉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇿🇦 开普敦</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇳🇦 温得和克</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇨🇩 金沙萨</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇨🇬 布拉柴维尔</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇹🇩 恩贾梅纳</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇹🇩 恩贾梅纳</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇦🇴 罗安达</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇱🇾 的黎波里</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇹🇳 突尼斯</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇨🇲 雅温得</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇨🇲 杜阿拉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇬🇦 利伯维尔</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇬🇶 马拉博</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇳🇬 阿布贾</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇳🇬 拉各斯</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇩🇿 阿尔及尔</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇧🇯 波多诺伏</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇳🇪 尼亚美</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇹🇬 洛美</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇬🇭 阿克拉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇬🇭 阿克拉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇧🇫 瓦加杜古</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇨🇮 阿比让</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇲🇦 卡萨布兰卡</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇲🇱 巴马科</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇱🇷 蒙罗维亚</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇸🇱 弗里敦</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇬🇳 科纳克里</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇸🇳 达喀尔</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+## 🌍 各洲时间概览
 
-    <div class="continent-section">
-      <h2 class="continent-title">🌏 大洋洲</h2>
-      <table>
-        <thead>
-          <tr>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-            <th>地区</th>
-            <th>当前时间</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>🇹🇻 富纳富提</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇫🇯 苏瓦</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇳🇿 奥克兰</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇰🇮 塔拉瓦</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇲🇭 马朱罗</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇻🇺 维拉港</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇳🇷 亚伦</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇳🇨 努美阿</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇸🇧 霍尼亚拉</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇫🇲 帕利基尔</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇦🇺 布里斯班</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇦🇺 悉尼</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇦🇺 霍巴特</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇵🇬 莫尔兹比港</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇲🇵 塞班</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇦🇺 墨尔本</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇬🇺 阿加尼亚</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇵🇼 科罗尔</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇦🇺 珀斯</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇵🇳 亚当斯敦</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇵🇫 帕皮提</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇨🇰 拉罗汤加</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇦🇸 帕果帕果</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇼🇸 阿皮亚</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-          </tr>
-          <tr>
-            <td>🇹🇴 努库阿洛法</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td>🇼🇫 马塔乌图</td>
-            <td class="time-cell">2025-10-07 08:02:36</td>
-            <td></td>
-            <td></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+### 🌍 亚洲
 
-    <div class="footer">
-      <p>—— 由 GitHub Actions 自动生成 · 各洲城市按经度从东向西排序 · 每小时更新 ⏰</p>
-      <p>💡 提示：此页面支持响应式设计，可在手机和电脑上完美显示</p>
-    </div>
-  </div>
+| 地区 | 当前时间 | 地区 | 当前时间 | 地区 | 当前时间 |
+| :--: | :--: | :--: | :--: | :--: | :--: |
+| 🇯🇵 东京 | **2025-10-07 08:14:44** | 🇰🇷 首尔 | **2025-10-07 08:14:44** | 🇰🇵 平壤 | **2025-10-07 08:14:44** |
+| 🇹🇼 台北 | **2025-10-07 08:14:44** | 🇵🇭 马尼拉 | **2025-10-07 08:14:44** | 🇨🇳 北京 | **2025-10-07 08:14:44** |
+| 🇧🇳 斯里巴加湾 | **2025-10-07 08:14:44** | 🇭🇰 香港 | **2025-10-07 08:14:44** | 🇲🇴 澳门 | **2025-10-07 08:14:44** |
+| 🇲🇳 乌兰巴托 | **2025-10-07 08:14:44** | 🇮🇩 雅加达 | **2025-10-07 08:14:44** | 🇰🇭 金边 | **2025-10-07 08:14:44** |
+| 🇸🇬 新加坡 | **2025-10-07 08:14:44** | 🇱🇦 万象 | **2025-10-07 08:14:44** | 🇲🇾 吉隆坡 | **2025-10-07 08:14:44** |
+| 🇹🇭 曼谷 | **2025-10-07 08:14:44** | 🇲🇲 仰光 | **2025-10-07 08:14:44** | 🇧🇩 达卡 | **2025-10-07 08:14:44** |
+| 🇧🇹 廷布 | **2025-10-07 08:14:44** | 🇳🇵 加德满都 | **2025-10-07 08:14:44** | 🇱🇰 科伦坡 | **2025-10-07 08:14:44** |
+| 🇱🇰 科伦坡 | **2025-10-07 08:14:44** | 🇮🇳 新德里 | **2025-10-07 08:14:44** | 🇰🇿 阿拉木图 | **2025-10-07 08:14:44** |
+| 🇰🇬 比什凯克 | **2025-10-07 08:14:44** | 🇲🇻 马累 | **2025-10-07 08:14:44** | 🇺🇿 塔什干 | **2025-10-07 08:14:44** |
+| 🇦🇫 喀布尔 | **2025-10-07 08:14:44** | 🇹🇯 杜尚别 | **2025-10-07 08:14:44** | 🇵🇰 卡拉奇 | **2025-10-07 08:14:44** |
+| 🇴🇲 马斯喀特 | **2025-10-07 08:14:44** | 🇹🇲 阿什哈巴德 | **2025-10-07 08:14:44** | 🇦🇪 迪拜 | **2025-10-07 08:14:44** |
+| 🇶🇦 多哈 | **2025-10-07 08:14:44** | 🇮🇷 德黑兰 | **2025-10-07 08:14:44** | 🇧🇭 麦纳麦 | **2025-10-07 08:14:44** |
+| 🇦🇿 巴库 | **2025-10-07 08:14:44** | 🇰🇼 科威特城 | **2025-10-07 08:14:44** | 🇸🇦 利雅得 | **2025-10-07 08:14:44** |
+| 🇬🇪 第比利斯 | **2025-10-07 08:14:44** | 🇦🇲 埃里温 | **2025-10-07 08:14:44** | 🇮🇶 巴格达 | **2025-10-07 08:14:44** |
+| 🇯🇴 安曼 | **2025-10-07 08:14:44** | 🇱🇧 贝鲁特 | **2025-10-07 08:14:44** | 🇮🇱 耶路撒冷 | **2025-10-07 08:14:44** |
 
-  <script>
-    // 自动刷新功能
-    function updateTime() {
-      const now = new Date();
-      const timeString = now.toLocaleString("zh-CN", {
-        year: "numeric",
-        month: "2-digit",
-        day: "2-digit",
-        hour: "2-digit",
-        minute: "2-digit",
-        second: "2-digit"
-      });
-      document.querySelector(".update-time strong").textContent = timeString + " 北京时间";
-    }
+### 🌍 欧洲
 
-    // 每分钟更新时间显示
-    setInterval(updateTime, 60000);
+| 地区 | 当前时间 | 地区 | 当前时间 | 地区 | 当前时间 |
+| :--: | :--: | :--: | :--: | :--: | :--: |
+| 🇷🇺 莫斯科 | **2025-10-07 08:14:44** | 🇺🇦 基辅 | **2025-10-07 08:14:44** | 🇹🇷 伊斯坦布尔 | **2025-10-07 08:14:44** |
+| 🇲🇩 基希讷乌 | **2025-10-07 08:14:44** | 🇧🇾 明斯克 | **2025-10-07 08:14:44** | 🇷🇴 布加勒斯特 | **2025-10-07 08:14:44** |
+| 🇱🇹 维尔纽斯 | **2025-10-07 08:14:44** | 🇫🇮 赫尔辛基 | **2025-10-07 08:14:44** | 🇪🇪 塔林 | **2025-10-07 08:14:44** |
+| 🇱🇻 里加 | **2025-10-07 08:14:44** | 🇬🇷 雅典 | **2025-10-07 08:14:44** | 🇧🇬 索非亚 | **2025-10-07 08:14:44** |
+| 🇲🇰 斯科普里 | **2025-10-07 08:14:44** | 🇵🇱 华沙 | **2025-10-07 08:14:44** | 🇷🇸 贝尔格莱德 | **2025-10-07 08:14:44** |
+| 🇦🇱 地拉那 | **2025-10-07 08:14:44** | 🇲🇪 波德戈里察 | **2025-10-07 08:14:44** | 🇭🇺 布达佩斯 | **2025-10-07 08:14:44** |
+| 🇧🇦 萨拉热窝 | **2025-10-07 08:14:44** | 🇸🇪 斯德哥尔摩 | **2025-10-07 08:14:44** | 🇦🇹 维也纳 | **2025-10-07 08:14:44** |
+| 🇭🇷 萨格勒布 | **2025-10-07 08:14:44** | 🇸🇮 卢布尔雅那 | **2025-10-07 08:14:44** | 🇨🇿 布拉格 | **2025-10-07 08:14:44** |
+| 🇩🇪 柏林 | **2025-10-07 08:14:44** | 🇩🇰 哥本哈根 | **2025-10-07 08:14:44** | 🇮🇹 罗马 | **2025-10-07 08:14:44** |
+| 🇳🇴 奥斯陆 | **2025-10-07 08:14:44** | 🇨🇭 苏黎世 | **2025-10-07 08:14:44** | 🇱🇺 卢森堡 | **2025-10-07 08:14:44** |
+| 🇳🇱 阿姆斯特丹 | **2025-10-07 08:14:44** | 🇧🇪 布鲁塞尔 | **2025-10-07 08:14:44** | 🇫🇷 巴黎 | **2025-10-07 08:14:44** |
+| 🇬🇧 伦敦 | **2025-10-07 08:14:44** | 🇪🇸 马德里 | **2025-10-07 08:14:44** | 🇮🇪 都柏林 | **2025-10-07 08:14:44** |
+| 🇵🇹 里斯本 | **2025-10-07 08:14:44** | 🇮🇸 雷克雅未克 | **2025-10-07 08:14:44** |   |   |
 
-    // 页面加载完成后的初始化
-    document.addEventListener("DOMContentLoaded", function() {
-      console.log("🌏 全球时间页面已加载");
-      // 可以在这里添加更多交互功能
-    });
+### 🌍 美洲
 
-    // 添加页面可见性检测，当页面重新可见时更新时间
-    document.addEventListener("visibilitychange", function() {
-      if (!document.hidden) {
-        updateTime();
-      }
-    });
-  </script>
-</body>
-</html>
+| 地区 | 当前时间 | 地区 | 当前时间 | 地区 | 当前时间 |
+| :--: | :--: | :--: | :--: | :--: | :--: |
+| 🇧🇷 里约热内卢 | **2025-10-07 08:14:44** | 🇧🇷 圣保罗 | **2025-10-07 08:14:44** | 🇬🇫 卡宴 | **2025-10-07 08:14:44** |
+| 🇸🇷 帕拉马里博 | **2025-10-07 08:14:44** | 🇺🇾 蒙得维的亚 | **2025-10-07 08:14:44** | 🇵🇾 亚松森 | **2025-10-07 08:14:44** |
+| 🇬🇾 乔治敦 | **2025-10-07 08:14:44** | 🇦🇷 布宜诺斯艾利斯 | **2025-10-07 08:14:44** | 🇧🇧 布里奇敦 | **2025-10-07 08:14:44** |
+| 🇹🇹 西班牙港 | **2025-10-07 08:14:44** | 🇻🇪 加拉加斯 | **2025-10-07 08:14:44** | 🇧🇴 拉巴斯 | **2025-10-07 08:14:44** |
+| 🇩🇴 圣多明各 | **2025-10-07 08:14:44** | 🇨🇱 圣地亚哥 | **2025-10-07 08:14:44** | 🇺🇸 纽约 | **2025-10-07 08:14:44** |
+| 🇨🇴 波哥大 | **2025-10-07 08:14:44** | 🇯🇲 金斯敦 | **2025-10-07 08:14:44** | 🇵🇪 利马 | **2025-10-07 08:14:44** |
+| 🇪🇨 基多 | **2025-10-07 08:14:44** | 🇨🇦 多伦多 | **2025-10-07 08:14:44** | 🇵🇦 巴拿马城 | **2025-10-07 08:14:44** |
+| 🇨🇺 哈瓦那 | **2025-10-07 08:14:44** | 🇨🇷 圣何塞 | **2025-10-07 08:14:44** | 🇳🇮 马那瓜 | **2025-10-07 08:14:44** |
+| 🇭🇳 特古西加尔巴 | **2025-10-07 08:14:44** | 🇺🇸 芝加哥 | **2025-10-07 08:14:44** | 🇬🇹 危地马拉城 | **2025-10-07 08:14:44** |
+| 🇲🇽 墨西哥城 | **2025-10-07 08:14:44** | 🇺🇸 丹佛 | **2025-10-07 08:14:44** | 🇨🇱 复活节岛 | **2025-10-07 08:14:44** |
+| 🇺🇸 洛杉矶 | **2025-10-07 08:14:44** | 🇨🇦 温哥华 | **2025-10-07 08:14:44** | 🇺🇸 安克雷奇 | **2025-10-07 08:14:44** |
 
-<!-- GENERATED_BY_GMC_SCRIPT -->
+### 🌍 非洲
+
+| 地区 | 当前时间 | 地区 | 当前时间 | 地区 | 当前时间 |
+| :--: | :--: | :--: | :--: | :--: | :--: |
+| 🇲🇺 路易港 | **2025-10-07 08:14:44** | 🇸🇨 维多利亚 | **2025-10-07 08:14:44** | 🇲🇬 塔那那利佛 | **2025-10-07 08:14:44** |
+| 🇸🇴 摩加迪沙 | **2025-10-07 08:14:44** | 🇰🇲 莫罗尼 | **2025-10-07 08:14:44** | 🇩🇯 吉布提 | **2025-10-07 08:14:44** |
+| 🇹🇿 达累斯萨拉姆 | **2025-10-07 08:14:44** | 🇪🇷 阿斯马拉 | **2025-10-07 08:14:44** | 🇪🇹 亚的斯亚贝巴 | **2025-10-07 08:14:44** |
+| 🇰🇪 内罗毕 | **2025-10-07 08:14:44** | 🇺🇬 坎帕拉 | **2025-10-07 08:14:44** | 🇲🇿 马普托 | **2025-10-07 08:14:44** |
+| 🇸🇩 喀土穆 | **2025-10-07 08:14:44** | 🇸🇸 朱巴 | **2025-10-07 08:14:44** | 🇪🇬 开罗 | **2025-10-07 08:14:44** |
+| 🇸🇿 姆巴巴内 | **2025-10-07 08:14:44** | 🇿🇼 哈拉雷 | **2025-10-07 08:14:44** | 🇷🇼 基加利 | **2025-10-07 08:14:44** |
+| 🇧🇮 布琼布拉 | **2025-10-07 08:14:44** | 🇿🇲 卢萨卡 | **2025-10-07 08:14:44** | 🇿🇦 约翰内斯堡 | **2025-10-07 08:14:44** |
+| 🇱🇸 马塞卢 | **2025-10-07 08:14:44** | 🇧🇼 哈博罗内 | **2025-10-07 08:14:44** | 🇨🇫 班吉 | **2025-10-07 08:14:44** |
+| 🇿🇦 开普敦 | **2025-10-07 08:14:44** | 🇳🇦 温得和克 | **2025-10-07 08:14:44** | 🇨🇩 金沙萨 | **2025-10-07 08:14:44** |
+| 🇨🇬 布拉柴维尔 | **2025-10-07 08:14:44** | 🇹🇩 恩贾梅纳 | **2025-10-07 08:14:44** | 🇹🇩 恩贾梅纳 | **2025-10-07 08:14:44** |
+| 🇦🇴 罗安达 | **2025-10-07 08:14:44** | 🇱🇾 的黎波里 | **2025-10-07 08:14:44** | 🇹🇳 突尼斯 | **2025-10-07 08:14:44** |
+| 🇨🇲 雅温得 | **2025-10-07 08:14:44** | 🇨🇲 杜阿拉 | **2025-10-07 08:14:44** | 🇬🇦 利伯维尔 | **2025-10-07 08:14:44** |
+| 🇬🇶 马拉博 | **2025-10-07 08:14:44** | 🇳🇬 阿布贾 | **2025-10-07 08:14:44** | 🇳🇬 拉各斯 | **2025-10-07 08:14:44** |
+| 🇩🇿 阿尔及尔 | **2025-10-07 08:14:44** | 🇧🇯 波多诺伏 | **2025-10-07 08:14:44** | 🇳🇪 尼亚美 | **2025-10-07 08:14:44** |
+| 🇹🇬 洛美 | **2025-10-07 08:14:44** | 🇬🇭 阿克拉 | **2025-10-07 08:14:44** | 🇬🇭 阿克拉 | **2025-10-07 08:14:44** |
+| 🇧🇫 瓦加杜古 | **2025-10-07 08:14:44** | 🇨🇮 阿比让 | **2025-10-07 08:14:44** | 🇲🇦 卡萨布兰卡 | **2025-10-07 08:14:44** |
+| 🇲🇱 巴马科 | **2025-10-07 08:14:44** | 🇱🇷 蒙罗维亚 | **2025-10-07 08:14:44** | 🇸🇱 弗里敦 | **2025-10-07 08:14:44** |
+| 🇬🇳 科纳克里 | **2025-10-07 08:14:44** | 🇸🇳 达喀尔 | **2025-10-07 08:14:44** |   |   |
+
+### 🌍 大洋洲
+
+| 地区 | 当前时间 | 地区 | 当前时间 | 地区 | 当前时间 |
+| :--: | :--: | :--: | :--: | :--: | :--: |
+| 🇹🇻 富纳富提 | **2025-10-07 08:14:44** | 🇫🇯 苏瓦 | **2025-10-07 08:14:44** | 🇳🇿 奥克兰 | **2025-10-07 08:14:44** |
+| 🇰🇮 塔拉瓦 | **2025-10-07 08:14:44** | 🇲🇭 马朱罗 | **2025-10-07 08:14:44** | 🇻🇺 维拉港 | **2025-10-07 08:14:44** |
+| 🇳🇷 亚伦 | **2025-10-07 08:14:44** | 🇳🇨 努美阿 | **2025-10-07 08:14:44** | 🇸🇧 霍尼亚拉 | **2025-10-07 08:14:44** |
+| 🇫🇲 帕利基尔 | **2025-10-07 08:14:44** | 🇦🇺 布里斯班 | **2025-10-07 08:14:44** | 🇦🇺 悉尼 | **2025-10-07 08:14:44** |
+| 🇦🇺 霍巴特 | **2025-10-07 08:14:44** | 🇵🇬 莫尔兹比港 | **2025-10-07 08:14:44** | 🇲🇵 塞班 | **2025-10-07 08:14:44** |
+| 🇦🇺 墨尔本 | **2025-10-07 08:14:44** | 🇬🇺 阿加尼亚 | **2025-10-07 08:14:44** | 🇵🇼 科罗尔 | **2025-10-07 08:14:44** |
+| 🇦🇺 珀斯 | **2025-10-07 08:14:44** | 🇵🇳 亚当斯敦 | **2025-10-07 08:14:44** | 🇵🇫 帕皮提 | **2025-10-07 08:14:44** |
+| 🇨🇰 拉罗汤加 | **2025-10-07 08:14:44** | 🇦🇸 帕果帕果 | **2025-10-07 08:14:44** | 🇼🇸 阿皮亚 | **2025-10-07 08:14:44** |
+| 🇹🇴 努库阿洛法 | **2025-10-07 08:14:44** | 🇼🇫 马塔乌图 | **2025-10-07 08:14:44** |   |   |
+
+—— 由 GitHub Actions 自动生成 · 各洲城市按经度从东向西排序 · 每小时更新 ⏰
+
+💡 提示：完整版本请查看 [index.html](index.html) 文件
